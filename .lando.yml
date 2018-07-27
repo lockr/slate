@@ -1,0 +1,20 @@
+name: lockr-docs
+recipe: custom
+config:
+  webroot: ./build
+proxy:
+  appserver:
+    - lockr.docs.lndo.site
+services:
+  appserver:
+    type: ruby:2.4
+    command:
+      - lando bundler install
+      - lando bundler exec middleman build --clean
+tooling:
+  gem:
+    service: appserver_cli
+  ruby:
+    service: appserver_cli
+  bundler:
+    service: appserver_cli
